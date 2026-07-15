@@ -39,7 +39,7 @@ const authService = {
 
         localStorage.clear();
 
-        window.location.href = "/";
+        window.location.href = "#/";
 
     },
 
@@ -80,30 +80,6 @@ const authService = {
     return response.data;
 
 },
-
-    redirectDashboard() {
-
-        const role = this.getRole();
-
-        if (role === "DIRECTOR") {
-
-            window.location.href = "/director/dashboard";
-
-        }
-
-        if (role === "SYSTEM_OFFICER") {
-
-            window.location.href = "/system/dashboard";
-
-        }
-
-        if (role === "DISTRICT_OFFICER") {
-
-            window.location.href = "/district/dashboard";
-
-        }
-
-    }
 
 };
 

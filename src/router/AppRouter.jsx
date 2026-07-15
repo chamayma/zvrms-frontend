@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
 
@@ -40,7 +40,7 @@ function AppRouter() {
 
     return (
 
-        <BrowserRouter>
+        <HashRouter>
 
             <Routes>
 
@@ -152,7 +152,7 @@ function AppRouter() {
 
             </Routes>
 
-        </BrowserRouter>
+        </HashRouter>
 
     );
 

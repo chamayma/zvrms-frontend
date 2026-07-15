@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     FaUser,
     FaLock,
@@ -11,6 +12,7 @@ import authService from "../../services/authService";
 
 function Login() {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -30,9 +32,16 @@ function Login() {
 
         try {
 
-            await authService.login(username, password);
+            const user = await authService.login(username, password);
 
-            authService.redirectDashboard();
+            const role = user.role || authService.getRole();
+            if (role === "DIRECTOR") {
+                navigate("/director/dashboard");
+            } else if (role === "SYSTEM_OFFICER") {
+                navigate("/system/dashboard");
+            } else if (role === "DISTRICT_OFFICER") {
+                navigate("/district/dashboard");
+            }
 
         } catch (error) {
 
