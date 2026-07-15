@@ -15,6 +15,8 @@ import RegisterVoter from "../pages/districtOfficer/RegisterVoter";
 import Voters from "../pages/districtOfficer/Voters";
 import DistrictReports from "../pages/districtOfficer/Reports";
 
+import ChangePassword from "../pages/profile/ChangePassword";
+
 function ProtectedRoute({ children, roles }) {
 
     const token = localStorage.getItem("token");
@@ -141,6 +143,17 @@ function AppRouter() {
                     element={
                         <ProtectedRoute roles={["DISTRICT_OFFICER"]}>
                             <DistrictReports />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/* Profile */}
+
+                <Route
+                    path="/profile/change-password"
+                    element={
+                        <ProtectedRoute roles={["DIRECTOR", "SYSTEM_OFFICER", "DISTRICT_OFFICER"]}>
+                            <ChangePassword />
                         </ProtectedRoute>
                     }
                 />

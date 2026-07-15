@@ -4,7 +4,6 @@ import {
     FaUserTie,
     FaClipboardList,
     FaFilePdf,
-    FaLock,
     FaSignOutAlt
 } from "react-icons/fa";
 
@@ -161,21 +160,6 @@ function Sidebar() {
 </div>
 
 <div className="mt-auto p-3 border-top">
-                <button
-    className="btn btn-outline-dark w-100 mb-3"
-    onClick={() => window.location.href="/profile/change-password"}
->
-    <FaLock className="me-2"/>
-    Change Password
-</button>
-
-{/* <button
-    className="btn btn-dark w-100"
-    onClick={logout}
->
-    <FaSignOutAlt className="me-2"/>
-    Logout
-</button> */}
 
                 <button
 
@@ -187,7 +171,7 @@ function Sidebar() {
 
                     <FaSignOutAlt className="me-2"/>
 
-                    Logout
+                    <span>Logout</span>
 
                 </button>
 

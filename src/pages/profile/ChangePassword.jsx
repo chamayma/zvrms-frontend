@@ -55,7 +55,7 @@ function ChangePassword() {
 
         } catch (error) {
 
-            toast.success(
+            toast.error(
 
                 error.response?.data?.message ||
 

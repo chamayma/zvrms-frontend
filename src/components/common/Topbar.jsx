@@ -41,13 +41,13 @@ function Topbar() {
 
                 <div>
 
-                    <div className="topbar-title">
+                    <div className="topbar-title text-truncate" style={{ maxWidth: '40vw' }}>
 
                         Zanzibar Voter Registration Monitoring System
 
                     </div>
 
-                    <div className="topbar-subtitle">
+                    <div className="topbar-subtitle d-none d-sm-block">
 
                         Government of Zanzibar
 
@@ -57,9 +57,9 @@ function Topbar() {
 
             </div>
 
-            <div className="topbar-right">
+            <div className="topbar-right d-flex align-items-center">
 
-                <div className="text-end me-4">
+                <div className="text-end me-4 d-none d-lg-block">
 
                     <div>
 
@@ -114,6 +114,19 @@ function Topbar() {
                         <li>
 
                             <hr className="dropdown-divider"/>
+
+                        </li>
+
+                        <li>
+
+                            <button
+                                className="dropdown-item"
+                                onClick={() => window.location.href="#/profile/change-password"}
+                            >
+
+                                Change Password
+
+                            </button>
 
                         </li>
 

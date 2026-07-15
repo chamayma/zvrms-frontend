@@ -596,3 +596,45 @@ CARDS
     margin-bottom:5px;
 
 }
+
+/* Responsive Media Queries */
+@media (max-width: 991px) {
+    .sidebar { width: 80px; overflow-x: hidden; }
+    .sidebar .sidebar-logo h4, 
+    .sidebar .sidebar-logo small, 
+    .sidebar .sidebar-menu span, 
+    .sidebar .sidebar-menu small,
+    .sidebar .mt-auto span {
+        display: none !important;
+    }
+    .sidebar .sidebar-logo img { width: 40px; }
+    .sidebar .btn-danger, .sidebar .btn-outline-dark {
+        padding: 10px;
+        font-size: 0;
+    }
+    .sidebar .btn-danger svg, .sidebar .btn-outline-dark svg {
+        font-size: 20px;
+        margin: 0 !important;
+    }
+    .sidebar .sidebar-menu a {
+        justify-content: center;
+        padding: 15px;
+    }
+    .sidebar .sidebar-menu a svg {
+        margin: 0 !important;
+        font-size: 24px;
+    }
+    .topbar { left: 80px; padding: 0 15px; }
+    .main { margin-left: 80px; }
+    .topbar-left img { width: 35px; }
+    .topbar-title { font-size: 18px; }
+}
+
+@media (max-width: 576px) {
+    .topbar-title { font-size: 14px; white-space: normal; line-height: 1.2; }
+    .sidebar { width: 65px; }
+    .topbar { left: 65px; }
+    .main { margin-left: 65px; }
+    .topbar-right .dropdown-toggle { font-size: 14px; padding: 5px 10px; }
+    .topbar-right .dropdown-toggle svg { width: 16px; height: 16px; }
+}
