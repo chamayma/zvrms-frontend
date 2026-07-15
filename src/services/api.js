@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
 
-    baseURL: "https://zvrms.onrender.com",
+    baseURL: "https://zvrms.onrender.com/api",
 
     headers: {
 
