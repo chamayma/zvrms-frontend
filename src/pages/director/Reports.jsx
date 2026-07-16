@@ -14,163 +14,163 @@ function Reports() {
     const [search, setSearch] = useState("");
     const [districts, setDistricts] = useState([]);
 
-const [shehia, setShehia] = useState([]);
+    const [shehia, setShehia] = useState([]);
 
-const [districtId, setDistrictId] = useState("");
+    const [districtId, setDistrictId] = useState("");
 
-const [shehiaId, setShehiaId] = useState("");
-const [sex, setSex] = useState("");
+    const [shehiaId, setShehiaId] = useState("");
+    const [sex, setSex] = useState("");
 
-const [dateFrom, setDateFrom] = useState("");
+    const [dateFrom, setDateFrom] = useState("");
 
-const [dateTo, setDateTo] = useState("");
+    const [dateTo, setDateTo] = useState("");
 
-const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-const [page, setPage] = useState(0);
+    const [page, setPage] = useState(0);
 
-const [size] = useState(10);
+    const [size] = useState(10);
 
-const [totalPages, setTotalPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
 
- useEffect(() => {
+    useEffect(() => {
 
-    loadDistricts();
+        loadDistricts();
 
-    loadReports();
+        loadReports();
 
-}, [page]);
+    }, [page]);
 
-async function loadReports() {
+    async function loadReports() {
 
-    setLoading(true);
+        setLoading(true);
 
-    try {
+        try {
 
-        const data = await reportService.getAll({
+            const data = await reportService.getAll({
 
-    page,
+                page,
 
-    size,
+                size,
 
-    search,
+                search,
 
-    districtId,
+                districtId,
 
-    shehiaId,
+                shehiaId,
 
-    sex,
+                sex,
 
-    dateFrom,
+                dateFrom,
 
-    dateTo
+                dateTo
 
-});
+            });
 
-setReports(data.content);
+            setReports(data.content);
 
-setTotalPages(data.totalPages);
-    } catch (error) {
+            setTotalPages(data.totalPages);
+        } catch (error) {
 
-        console.log(error);
+            console.log(error);
 
-    } finally {
+        } finally {
 
-        setLoading(false);
+            setLoading(false);
 
-    }
-
-}
-
-async function loadDistricts() {
-
-    try {
-
-        const data = await districtService.getAll();
-
-        setDistricts(data);
-
-    } catch (error) {
-
-        console.log(error);
+        }
 
     }
 
-}
+    async function loadDistricts() {
 
-async function loadShehia(id) {
+        try {
 
-    try {
+            const data = await districtService.getAll();
 
-        const data = await shehiaService.getByDistrict(id);
+            setDistricts(data);
 
-        setShehia(data);
+        } catch (error) {
 
-    } catch (error) {
+            console.log(error);
 
-        console.log(error);
+        }
 
     }
 
-}
+    async function loadShehia(id) {
+
+        try {
+
+            const data = await shehiaService.getByDistrict(id);
+
+            setShehia(data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    }
 
 
     async function exportPdf() {
 
-    try {
+        try {
 
-        const blob = await reportService.exportPdf({
+            const blob = await reportService.exportPdf({
 
-            search,
-            districtId,
-            shehiaId,
-            sex,
-            dateFrom,
-            dateTo
+                search,
+                districtId,
+                shehiaId,
+                sex,
+                dateFrom,
+                dateTo
 
-        });
+            });
 
-        saveAs(blob, "Director_Report.pdf");
+            saveAs(blob, "Director_Report.pdf");
 
-    } catch (error) {
+        } catch (error) {
 
-        console.log(error);
+            console.log(error);
 
-    }
-
-}
-
-async function exportExcel() {
-
-    try {
-
-        const blob = await reportService.exportExcel({
-
-            search,
-            districtId,
-            shehiaId,
-            sex,
-            dateFrom,
-            dateTo
-
-        });
-
-        saveAs(blob, "Director_Report.xlsx");
-
-    } catch (error) {
-
-        console.log(error);
+        }
 
     }
 
-}
+    async function exportExcel() {
 
-function printReport() {
+        try {
 
-    window.print();
+            const blob = await reportService.exportExcel({
 
-}
+                search,
+                districtId,
+                shehiaId,
+                sex,
+                dateFrom,
+                dateTo
+
+            });
+
+            saveAs(blob, "Director_Report.xlsx");
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    }
+
+    function printReport() {
+
+        window.print();
+
+    }
 
     return (
 
@@ -219,313 +219,313 @@ function printReport() {
 
             <div className="table-card">
 
-<div className="row g-3 mb-4">
+                <div className="row g-3 mb-4">
 
-    <div className="col-lg-4">
+                    <div className="col-lg-4">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            Search Name
+                            Search Name
 
-        </label>
+                        </label>
 
-        <input
-            className="form-control"
-            placeholder="Enter Full Name"
-            value={search}
-            onChange={(e)=>setSearch(e.target.value)}
-        />
+                        <input
+                            className="form-control"
+                            placeholder="Enter Full Name"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
 
-    </div>
+                    </div>
 
-    <div className="col-lg-4">
+                    <div className="col-lg-4">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            District
+                            District
 
-        </label>
+                        </label>
 
-        <select
-            className="form-select"
-            value={districtId}
-            onChange={(e)=>{
+                        <select
+                            className="form-select"
+                            value={districtId}
+                            onChange={(e) => {
 
-                setDistrictId(e.target.value);
+                                setDistrictId(e.target.value);
 
-                setShehiaId("");
+                                setShehiaId("");
 
-                loadShehia(e.target.value);
+                                loadShehia(e.target.value);
 
-            }}
-        >
+                            }}
+                        >
 
-            <option value="">All Districts</option>
+                            <option value="">All Districts</option>
 
-            {
+                            {
 
-                districts.map(d=>(
+                                districts.map(d => (
 
-                    <option
-                        key={d.id}
-                        value={d.id}
-                    >
+                                    <option
+                                        key={d.id}
+                                        value={d.id}
+                                    >
 
-                        {d.name}
+                                        {d.name}
 
-                    </option>
+                                    </option>
 
-                ))
+                                ))
 
-            }
+                            }
 
-        </select>
+                        </select>
 
-    </div>
+                    </div>
 
-    <div className="col-lg-4">
+                    <div className="col-lg-4">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            Shehia
+                            Shehia
 
-        </label>
+                        </label>
 
-        <select
-            className="form-select"
-            value={shehiaId}
-            onChange={(e)=>setShehiaId(e.target.value)}
-        >
+                        <select
+                            className="form-select"
+                            value={shehiaId}
+                            onChange={(e) => setShehiaId(e.target.value)}
+                        >
 
-            <option value="">All Shehia</option>
+                            <option value="">All Shehia</option>
 
-            {
+                            {
 
-                shehia.map(s=>(
+                                shehia.map(s => (
 
-                    <option
-                        key={s.id}
-                        value={s.id}
-                    >
+                                    <option
+                                        key={s.id}
+                                        value={s.id}
+                                    >
 
-                        {s.name}
+                                        {s.name}
 
-                    </option>
+                                    </option>
 
-                ))
+                                ))
 
-            }
+                            }
 
-        </select>
+                        </select>
 
-    </div>
+                    </div>
 
-    <div className="col-lg-3">
+                    <div className="col-lg-3">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            Sex
+                            Sex
 
-        </label>
+                        </label>
 
-        <select
-            className="form-select"
-            value={sex}
-            onChange={(e)=>setSex(e.target.value)}
-        >
+                        <select
+                            className="form-select"
+                            value={sex}
+                            onChange={(e) => setSex(e.target.value)}
+                        >
 
-            <option value="">All</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
+                            <option value="">All</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
 
-        </select>
+                        </select>
 
-    </div>
+                    </div>
 
-    <div className="col-lg-3">
+                    <div className="col-lg-3">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            Start Date
+                            Start Date
 
-        </label>
+                        </label>
 
-        <input
-            type="date"
-            className="form-control"
-            value={dateFrom}
-            onChange={(e)=>setDateFrom(e.target.value)}
-        />
+                        <input
+                            type="date"
+                            className="form-control"
+                            value={dateFrom}
+                            onChange={(e) => setDateFrom(e.target.value)}
+                        />
 
-    </div>
+                    </div>
 
-    <div className="col-lg-3">
+                    <div className="col-lg-3">
 
-        <label className="form-label fw-bold">
+                        <label className="form-label fw-bold">
 
-            End Date
+                            End Date
 
-        </label>
+                        </label>
 
-        <input
-            type="date"
-            className="form-control"
-            value={dateTo}
-            onChange={(e)=>setDateTo(e.target.value)}
-        />
+                        <input
+                            type="date"
+                            className="form-control"
+                            value={dateTo}
+                            onChange={(e) => setDateTo(e.target.value)}
+                        />
 
-    </div>
+                    </div>
 
-    <div className="col-lg-3 d-flex align-items-end">
+                    <div className="col-lg-3 d-flex align-items-end">
 
-        <button
-            className="btn btn-primary me-2"
-            onClick={() => {
-                if (page === 0) {
-                    loadReports();
-                } else {
-                    setPage(0);
+                        <button
+                            className="btn btn-primary me-2"
+                            onClick={() => {
+                                if (page === 0) {
+                                    loadReports();
+                                } else {
+                                    setPage(0);
+                                }
+                            }}
+                        >
+                            Search
+                        </button>
+
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => {
+
+                                setSearch("");
+                                setDistrictId("");
+                                setShehiaId("");
+                                setSex("");
+                                setDateFrom("");
+                                setDateTo("");
+                                setPage(0);
+
+                                // Reload all reports after clearing filters
+                                setTimeout(() => {
+                                    loadReports();
+                                }, 0);
+
+                            }}
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </div>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+
+                    <h5 className="mb-0">
+
+                        Voter Records
+
+                    </h5>
+
+                    <span className="badge bg-primary">
+
+                        Total: {reports.length}
+
+                    </span>
+
+                </div>
+                {
+                    loading &&
+
+                    <div className="text-center my-5">
+
+                        <div className="spinner-border text-warning"></div>
+
+                    </div>
                 }
-            }}
-        >
-            Search
-        </button>
-
-        <button
-            className="btn btn-secondary"
-            onClick={() => {
-
-                setSearch("");
-                setDistrictId("");
-                setShehiaId("");
-                setSex("");
-                setDateFrom("");
-                setDateTo("");
-                setPage(0);
-
-                // Reload all reports after clearing filters
-                setTimeout(() => {
-                    loadReports();
-                }, 0);
-
-            }}
-        >
-            Reset
-        </button>
-
-    </div>
-
-</div>
-<div className="d-flex justify-content-between align-items-center mb-3">
-
-    <h5 className="mb-0">
-
-        Voter Records
-
-    </h5>
-
-    <span className="badge bg-primary">
-
-        Total: {reports.length}
-
-    </span>
-
-</div>
-{
-    loading &&
-
-    <div className="text-center my-5">
-
-        <div className="spinner-border text-warning"></div>
-
-    </div>
-}
 
                 <table className="table table-hover">
 
                     <thead>
 
-                    <tr>
+                        <tr>
 
-                        <th>#</th>
+                            <th>#</th>
 
-                        <th>Name</th>
+                            <th>Name</th>
 
-                        <th>Voter Number</th>
+                            <th>Voter Number</th>
 
-                        <th>District</th>
+                            <th>District</th>
 
-                        <th>Shehia</th>
+                            <th>Shehia</th>
 
-                        <th>Phone</th>
+                            <th>Phone</th>
 
-                    </tr>
+                        </tr>
 
                     </thead>
 
                     <tbody>
 
-{
-    reports.length === 0 ?
+                        {
+                            reports.length === 0 ?
 
-    (
+                                (
 
-        <tr>
+                                    <tr>
 
-            <td
-                colSpan="6"
-                className="text-center py-5 text-muted"
-            >
+                                        <td
+                                            colSpan="6"
+                                            className="text-center py-5 text-muted"
+                                        >
 
-                No voter records found.
+                                            No voter records found.
 
-            </td>
+                                        </td>
 
-        </tr>
+                                    </tr>
 
-    )
+                                )
 
-    :
+                                :
 
-    (
+                                (
 
-        reports.map((report,index)=>(
+                                    reports.map((report, index) => (
 
-            <tr key={report.id}>
+                                        <tr key={report.id}>
 
-                <td>{page * size + index + 1}</td>
+                                            <td>{page * size + index + 1}</td>
 
-                <td>{report.fullName}</td>
+                                            <td>{report.fullName}</td>
 
-                <td>{report.voterNumber}</td>
+                                            <td>{report.voterNumber}</td>
 
-                <td>{report.district}</td>
+                                            <td>{report.district}</td>
 
-                <td>{report.shehia}</td>
+                                            <td>{report.shehia}</td>
 
-                <td>{report.phoneNumber}</td>
+                                            <td>{report.phoneNumber}</td>
 
-            </tr>
+                                        </tr>
 
-        ))
+                                    ))
 
-    )
+                                )
 
-}
+                        }
 
-</tbody>
+                    </tbody>
 
 
-                </table>         
+                </table>
 
             </div>
 
             <Pagination
-    page={page}
-    totalPages={totalPages}
-    onPrevious={() => setPage(page - 1)}
-    onNext={() => setPage(page + 1)}
-/>
+                page={page}
+                totalPages={totalPages}
+                onPrevious={() => setPage(page - 1)}
+                onNext={() => setPage(page + 1)}
+            />
 
         </MainLayout>
 
