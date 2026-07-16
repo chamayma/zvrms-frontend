@@ -36,37 +36,41 @@ function DistrictOfficerModal({
 
     useEffect(() => {
 
-        if (officer) {
+        if (show) {
 
-            setForm({
+            if (officer) {
 
-                fullName: officer.fullName,
+                setForm({
 
-                username: officer.username,
+                    fullName: officer.fullName,
 
-                password: "",
+                    username: officer.username,
 
-                districtId: officer.districtId
+                    password: "",
 
-            });
+                    districtId: officer.districtId
 
-        } else {
+                });
 
-            setForm({
+            } else {
 
-                fullName: "",
+                setForm({
 
-                username: "",
+                    fullName: "",
 
-                password: "",
+                    username: "",
 
-                districtId: ""
+                    password: "",
 
-            });
+                    districtId: ""
+
+                });
+
+            }
 
         }
 
-    }, [officer]);
+    }, [officer, show]);
 
     async function loadDistricts() {
 
@@ -108,9 +112,13 @@ function DistrictOfficerModal({
 
                 );
 
+                toast.success("District Officer updated successfully.");
+
             } else {
 
                 await districtOfficerService.create(form);
+
+                toast.success("District Officer successfully registered.");
 
             }
 
@@ -118,9 +126,13 @@ function DistrictOfficerModal({
 
             onClose();
 
-        } catch {
+        } catch (error) {
 
-            toast.success("Failed to save District Officer.");
+            toast.error(
+
+                error.response?.data?.message || "Failed to save District Officer."
+
+            );
 
         }
 

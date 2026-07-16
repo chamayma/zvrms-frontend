@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import systemOfficerService from "../../services/systemOfficerService";
 
 function SystemOfficerModal({
@@ -23,33 +24,37 @@ function SystemOfficerModal({
 
     useEffect(() => {
 
-        if (officer) {
+        if (show) {
 
-            setForm({
+            if (officer) {
 
-                fullName: officer.fullName,
+                setForm({
 
-                username: officer.username,
+                    fullName: officer.fullName,
 
-                password: ""
+                    username: officer.username,
 
-            });
+                    password: ""
 
-        } else {
+                });
 
-            setForm({
+            } else {
 
-                fullName: "",
+                setForm({
 
-                username: "",
+                    fullName: "",
 
-                password: ""
+                    username: "",
 
-            });
+                    password: ""
+
+                });
+
+            }
 
         }
 
-    }, [officer]);
+    }, [officer, show]);
 
     const save = async () => {
 
@@ -73,9 +78,13 @@ function SystemOfficerModal({
 
                 );
 
+                toast.success("System Officer updated successfully.");
+
             } else {
 
                 await systemOfficerService.create(form);
+
+                toast.success("System Officer successfully registered.");
 
             }
 
@@ -84,6 +93,12 @@ function SystemOfficerModal({
             onClose();
 
         } catch (error) {
+
+            toast.error(
+
+                error.response?.data?.message || "Failed to save System Officer."
+
+            );
 
             console.log(error);
 

@@ -178,27 +178,33 @@ function Reports() {
 
                 </h2>
 
-                <div className="btn-group shadow-sm">
+                <div>
 
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-danger me-2"
                         onClick={exportPdf}
                     >
+
                         PDF
+
                     </button>
 
                     <button
-                        className="btn btn-success"
+                        className="btn btn-success me-2"
                         onClick={exportExcel}
                     >
+
                         Excel
+
                     </button>
 
                     <button
-                        className="btn btn-dark"
+                        className="btn btn-secondary"
                         onClick={printReport}
                     >
+
                         Print
+
                     </button>
 
                 </div>

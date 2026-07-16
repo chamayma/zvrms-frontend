@@ -98,15 +98,21 @@ function VoterModal({
 
             );
 
+            toast.success("Voter updated successfully.");
+
             onSuccess();
 
             onClose();
 
         }
 
-        catch {
+        catch (error) {
 
-            toast.success("Update failed.");
+            toast.error(
+
+                error.response?.data?.message || "Failed to update voter."
+
+            );
 
         }
 

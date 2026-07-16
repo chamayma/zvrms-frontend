@@ -112,6 +112,12 @@ function Reports() {
 
     }
 
+    function printReport() {
+
+        window.print();
+
+    }
+
     return (
 
         <MainLayout>
@@ -120,14 +126,14 @@ function Reports() {
 
                 <h2>
 
-                    District Report
+                    System Officer Reports
 
                 </h2>
 
-                <div className="btn-group">
+                <div>
 
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-danger me-2"
                         onClick={exportPdf}
                     >
 
@@ -136,7 +142,7 @@ function Reports() {
                     </button>
 
                     <button
-                        className="btn btn-success"
+                        className="btn btn-success me-2"
                         onClick={exportExcel}
                     >
 
@@ -145,8 +151,8 @@ function Reports() {
                     </button>
 
                     <button
-                        className="btn btn-dark"
-                        onClick={() => window.print()}
+                        className="btn btn-secondary"
+                        onClick={printReport}
                     >
 
                         Print
@@ -161,39 +167,38 @@ function Reports() {
 
                 <div className="row g-3 mb-4">
 
-                    <div className="col-md-3">
+                    <div className="col-lg-4">
+
+                        <label className="form-label fw-bold">
+
+                            Search Name
+
+                        </label>
 
                         <input
-
                             className="form-control"
-
-                            placeholder="Search..."
-
+                            placeholder="Enter Full Name"
                             value={search}
-
                             onChange={(e)=>setSearch(e.target.value)}
-
                         />
 
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-lg-4">
+
+                        <label className="form-label fw-bold">
+
+                            Shehia
+
+                        </label>
 
                         <select
-
                             className="form-select"
-
                             value={shehiaId}
-
                             onChange={(e)=>setShehiaId(e.target.value)}
-
                         >
 
-                            <option value="">
-
-                                All Shehia
-
-                            </option>
+                            <option value="">All Shehia</option>
 
                             {
 
@@ -216,78 +221,93 @@ function Reports() {
 
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-lg-4">
+
+                        <label className="form-label fw-bold">
+
+                            Sex
+
+                        </label>
 
                         <select
-
                             className="form-select"
-
                             value={sex}
-
                             onChange={(e)=>setSex(e.target.value)}
-
                         >
 
                             <option value="">All</option>
-
-                            <option value="MALE">
-
-                                Male
-
-                            </option>
-
-                            <option value="FEMALE">
-
-                                Female
-
-                            </option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
 
                         </select>
 
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-lg-4">
+
+                        <label className="form-label fw-bold">
+
+                            Start Date
+
+                        </label>
 
                         <input
-
                             type="date"
-
                             className="form-control"
-
                             value={dateFrom}
-
                             onChange={(e)=>setDateFrom(e.target.value)}
-
                         />
 
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-lg-4">
+
+                        <label className="form-label fw-bold">
+
+                            End Date
+
+                        </label>
 
                         <input
-
                             type="date"
-
                             className="form-control"
-
                             value={dateTo}
-
                             onChange={(e)=>setDateTo(e.target.value)}
-
                         />
+
+                    </div>
+
+                    <div className="col-lg-4 d-flex align-items-end">
+
+                        <button
+                            className="btn btn-primary me-2"
+                            onClick={loadReports}
+                        >
+                            Search
+                        </button>
+
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => {
+
+                                setSearch("");
+                                setShehiaId("");
+                                setSex("");
+                                setDateFrom("");
+                                setDateTo("");
+
+                                setTimeout(() => {
+                                    loadReports();
+                                }, 0);
+
+                            }}
+                        >
+                            Reset
+                        </button>
 
                     </div>
 
                 </div>
-
-                <button
-                    className="btn btn-primary mb-4"
-                    onClick={loadReports}
-                >
-
-                    Search
-
-                </button>
 
                 <div className="table-responsive">
 

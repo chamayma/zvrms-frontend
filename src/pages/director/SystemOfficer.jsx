@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import MainLayout from "../../layouts/MainLayout";
 import systemOfficerService from "../../services/systemOfficerService";
 import SystemOfficerModal from "../../components/modals/SystemOfficerModal";
@@ -51,7 +53,27 @@ function SystemOfficer() {
 
     async function deleteOfficer(id) {
 
-        if (!window.confirm("Delete this System Officer?")) {
+        const result = await Swal.fire({
+
+            title: "Delete System Officer?",
+
+            text: "This action cannot be undone.",
+
+            icon: "warning",
+
+            showCancelButton: true,
+
+            confirmButtonColor: "#d33",
+
+            cancelButtonColor: "#6c757d",
+
+            confirmButtonText: "Yes, Delete",
+
+            cancelButtonText: "Cancel"
+
+        });
+
+        if (!result.isConfirmed) {
 
             return;
 
@@ -61,9 +83,19 @@ function SystemOfficer() {
 
             await systemOfficerService.delete(id);
 
+            toast.success("System Officer deleted successfully.");
+
             loadData();
 
         } catch (error) {
+
+            toast.error(
+
+                error.response?.data?.message ||
+
+                "Failed to delete System Officer."
+
+            );
 
             console.log(error);
 

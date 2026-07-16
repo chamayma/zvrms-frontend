@@ -115,36 +115,6 @@ async function loadShehia(id) {
 
 }
 
-    async function loadReports() {
-
-    try {
-
-        const data = await reportService.getAll({
-
-            search,
-
-            districtId,
-
-            shehiaId,
-            sex,
-
-        dateFrom,
-
-        dateTo
-
-        });
-
-        setReports(data);
-
-    }
-
-    catch (error) {
-
-        console.log(error);
-
-    }
-
-}
 
     async function exportPdf() {
 
@@ -152,7 +122,12 @@ async function loadShehia(id) {
 
         const blob = await reportService.exportPdf({
 
-            search
+            search,
+            districtId,
+            shehiaId,
+            sex,
+            dateFrom,
+            dateTo
 
         });
 
@@ -172,7 +147,12 @@ async function exportExcel() {
 
         const blob = await reportService.exportExcel({
 
-            search
+            search,
+            districtId,
+            shehiaId,
+            sex,
+            dateFrom,
+            dateTo
 
         });
 
@@ -200,40 +180,40 @@ function printReport() {
 
                 <h2>
 
-                    Reports
+                    System Officer Reports
 
                 </h2>
 
                 <div>
 
-    <button
-        className="btn btn-danger me-2"
-        onClick={exportPdf}
-    >
+                    <button
+                        className="btn btn-danger me-2"
+                        onClick={exportPdf}
+                    >
 
-        PDF
+                        PDF
 
-    </button>
+                    </button>
 
-    <button
-        className="btn btn-success me-2"
-        onClick={exportExcel}
-    >
+                    <button
+                        className="btn btn-success me-2"
+                        onClick={exportExcel}
+                    >
 
-        Excel
+                        Excel
 
-    </button>
+                    </button>
 
-    <button
-        className="btn btn-secondary"
-        onClick={printReport}
-    >
+                    <button
+                        className="btn btn-secondary"
+                        onClick={printReport}
+                    >
 
-        Print
+                        Print
 
-    </button>
+                    </button>
 
-</div>
+                </div>
 
             </div>
 
@@ -399,25 +379,39 @@ function printReport() {
     <div className="col-lg-3 d-flex align-items-end">
 
         <button
-    className="btn btn-secondary"
-    onClick={() => {
+            className="btn btn-primary me-2"
+            onClick={() => {
+                if (page === 0) {
+                    loadReports();
+                } else {
+                    setPage(0);
+                }
+            }}
+        >
+            Search
+        </button>
 
-        setSearch("");
-        setDistrictId("");
-        setShehiaId("");
-        setSex("");
-        setDateFrom("");
-        setDateTo("");
+        <button
+            className="btn btn-secondary"
+            onClick={() => {
 
-        // Reload all reports after clearing filters
-        setTimeout(() => {
-            loadReports();
-        }, 0);
+                setSearch("");
+                setDistrictId("");
+                setShehiaId("");
+                setSex("");
+                setDateFrom("");
+                setDateTo("");
+                setPage(0);
 
-    }}
->
-    Reset
-</button>
+                // Reload all reports after clearing filters
+                setTimeout(() => {
+                    loadReports();
+                }, 0);
+
+            }}
+        >
+            Reset
+        </button>
 
     </div>
 
