@@ -136,12 +136,12 @@ function Sidebar() {
 
             <NavLink to="/district/register-voter">
                 <FaClipboardList />
-                <span>Register Voter</span>
+                <span>Register New Card</span>
             </NavLink>
 
             <NavLink to="/district/voters">
                 <FaUsers />
-                <span>Registered Voters</span>
+                <span>Cards Issued</span>
             </NavLink>
 
             <small className="text-uppercase fw-bold text-dark ms-3 mt-4 mb-2 d-block">

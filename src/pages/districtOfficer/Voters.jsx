@@ -181,6 +181,10 @@ function Voters() {
 
                             <th>Shehia</th>
 
+                            <th>Issue Date</th>
+
+                            <th>Place of Birth</th>
+
                             <th width="180">
 
                                 Action
@@ -202,7 +206,7 @@ function Voters() {
                                 <tr>
 
                                     <td
-                                        colSpan="7"
+                                        colSpan="9"
                                         className="text-center py-5"
                                     >
 
@@ -255,6 +259,18 @@ function Voters() {
                                         <td>
 
                                             {voter.shehia}
+
+                                        </td>
+
+                                        <td>
+
+                                            {voter.issueDate}
+
+                                        </td>
+
+                                        <td>
+
+                                            {voter.placeOfBirth}
 
                                         </td>
 
